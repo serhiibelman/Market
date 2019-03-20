@@ -1,0 +1,6 @@
+
+
+{% for product in products %}
+    <a href="{% url 'market:prods_detail' cname product.id %}">{{ product.title }}</a>
+    <br>
+{% endfor %}
