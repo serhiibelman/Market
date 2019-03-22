@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+	<title></title>
+    <link rel="stylesheet" type="text/css" href="{% static 'market/css/base.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1>Market</h1>
+    </div>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>
