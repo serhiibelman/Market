@@ -11,6 +11,9 @@ def main(request):
 
 def prods(request, cname):
     products = Products.objects.filter(category__name=cname)
+    if request.method == 'POST':
+        pid = request.POST['pid']
+        product = Products.objects.get(id=pid)
     context = {
         'products': products,
         'cname': cname
