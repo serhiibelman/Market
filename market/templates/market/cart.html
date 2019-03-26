@@ -1,0 +1,28 @@
+{% extends 'market/base.html' %}
+
+{% block content %}
+<h1>Cart</h1>
+<ul class="cart-container">
+    <li>
+    {% for product in products %}
+        <div>
+            <a href="{% url 'market:prods_detail' 'Tesla' product.id %}">{{ product.title }}</a>
+            <br>
+            <form action="." method="POST">
+                {% csrf_token %}
+                <!-- <label for="pid">Add to Cart</label>
+                <input type="submit" name="pid" value="{{ product.id }}"> -->
+                <button type="submit" name="remove" value="{{ product.id }}">Remove</button>
+            </form>
+        </div>
+        <br>
+    {% endfor %}
+    </li>
+    {% if products %}
+    <li>
+        <button>Buy</button>
+    </li>
+    {% endif %}
+</ul>
+
+{% endblock %}

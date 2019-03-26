@@ -2,15 +2,16 @@
 <html>
 <head>
     {% load static %}
-	<title></title>
+    <title></title>
     <link rel="stylesheet" type="text/css" href="{% static 'market/css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'market/css/cart.css' %}">
 </head>
 <body>
     <div class="header">
         <ul class="navbar">
             <li><a href="{% url 'market:main' %}">Market</a></li>
             <li><a href="#"><i class="i-sign-in"></i>Sign-in</a></li>
-            <li><a href="#"><i class="i-cart"></i>Cart</a></li>
+            <li><a href="{% url 'market:cart' %}"><i class="i-cart"></i>Cart</a></li>
         </ul>
     </div>
     <div class="content">
