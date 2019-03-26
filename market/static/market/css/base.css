@@ -15,7 +15,7 @@ body {
     height: 48px;
     overflow: hidden;
     list-style-type: none;
-    border: 1px dashed red;
+    /*border: 1px dashed red;*/
 }
 
 .navbar li {
@@ -27,8 +27,7 @@ body {
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-    
-    border: 1px dashed green;
+    /*border: 1px dashed green;*/
 }
 
 .navbar li:first-child {
@@ -51,7 +50,7 @@ body {
 }*/
 
 .i-cart {
-    
+
 }
 
 .content {
