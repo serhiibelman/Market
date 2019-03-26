@@ -8,15 +8,16 @@
 <body>
     <div class="header">
         <ul class="navbar">
-            <li>Market</li>
-            <li>Cart</li>
-            <li>Sign-in</li>
+            <li><a href="{% url 'market:main' %}">Market</a></li>
+            <li><a href="#"><i class="i-sign-in"></i>Sign-in</a></li>
+            <li><a href="#"><i class="i-cart"></i>Cart</a></li>
         </ul>
     </div>
     <div class="content">
+        {{ balance }}
         {% block content %}
         {% endblock %}
     </div>
-
+    <!-- <script src="{% static 'market/js/sms_variables.js' %}"></script> -->
 </body>
 </html>
