@@ -1,0 +1,16 @@
+{% extends 'market/base.html' %}
+
+{% block content %}
+{% for product in merch %}
+    <div>
+        <a href="{% url 'market:merch_detail' cname product.id %}">{{ product.title }}</a>
+        <br>
+        <form action="." method="POST">
+            {% csrf_token %}
+            <button type="submit" name="pid" value="{{ product.id }}">Add to Cart</button>
+        </form>
+    </div>
+    
+    <br>
+{% endfor %}
+{% endblock %}
