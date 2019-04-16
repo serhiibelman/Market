@@ -1,6 +1,11 @@
 from django.db import models
 
 
+LABELS = (
+    ('1', 'Cars'),
+    ('2', 'Merch')
+)
+
 SIZES = (
     ('S', 'Small'),
     ('M', 'Medium'),
@@ -16,6 +21,7 @@ MATERIALS = (
 class Categories(models.Model):
     name = models.CharField(max_length=50, unique=True)
     image = models.CharField(max_length=250)
+    label = models.CharField(max_length=1, choices=LABELS)
 
     def __str__(self):
         return '{}'.format(self.name)
