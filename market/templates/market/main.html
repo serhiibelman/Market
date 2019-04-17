@@ -3,11 +3,11 @@
 {% block content %}
 {% for category in categories %}
     {% if category.label == '1' %}
-    <a href="{% url 'market:prods' category.name %}">{{ category.name }}</a>
-    <br>
+        <a href="{% url 'market:prods' category.name %}">{{ category.name }}</a>
+        <br>
     {% elif category.label == '2' %}
-    <a href="{% url 'market:merch' category.name %}">{{ category.name }}</a>
-    <br>
+        <a href="{% url 'market:merch' category.name %}">{{ category.name }}</a>
+        <br>
     {% endif %}
 {% endfor %}
 {% endblock %}

@@ -1,8 +1,23 @@
 {% extends 'market/base.html' %}
 
 {% block content %}
-{{ s.title }}<br>
-<img src="url({{ image }})"><br>
-{{ product.description }}<br>
-{{ product.price }}
+
+{{ shirt.title }}
+{{ shirt.image }}
+<br>
+{% for material in materials %}
+    {{ material.material }}:
+    <br>
+    
+    <br>
+{% endfor %}
+
+{% for option in options %}
+    {{ option.size }} {{ option.color }}
+{% endfor %}
+<br>
+======================
+<br>
+{{ shirt.description }}
+
 {% endblock %}

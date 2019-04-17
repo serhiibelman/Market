@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 
-from .models import Categories, Products, Shirt, ShirtMaterial, ShirtSize
+from .models import Categories, Products, Shirt, ShirtMaterial, ShirtOptions
 
 
 def main(request):
@@ -16,14 +16,12 @@ def cart(request):
         product.in_cart = False
         product.save()
     context = {
-        'products': products,
-        # 'cname': cname
+        'products': products
     }
     return render(request, 'market/cart.html', context)
 
 def prods(request, cname):
     products = Products.objects.filter(category__name=cname)
-    # template
     if request.method == 'POST':
         pid = request.POST['pid']
         product = Products.objects.get(id=pid)
@@ -45,6 +43,7 @@ def prods_detail(request, cname, pid):
 
 def merch(request, cname):
     shirts = Shirt.objects.filter(category__name=cname)
+    print(shirts)
     if request.method == 'POST':
         pid = request.POST['pid']
         shirt = Shirt.objects.get(id=pid)
@@ -60,5 +59,13 @@ def merch(request, cname):
 
 def merch_detail(request, cname, pid):
     shirt = get_object_or_404(Shirt, id=pid)
-    context = {'shirt': shirt}
-    return render(request, 'market/shirt_detail.html', context)
+    materials = ShirtMaterial.objects.filter(shirt=shirt.id)
+    options = ShirtOptions.objects.filter(material__material='cotton')
+    for option in options:
+        print(option.get_color())
+    context = {
+         'shirt': shirt,
+         'materials': materials,
+         'options': options
+    }
+    return render(request, 'market/merch_detail.html', context)
