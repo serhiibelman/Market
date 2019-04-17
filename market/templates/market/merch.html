@@ -2,6 +2,7 @@
 
 {% block content %}
 {% for product in merch %}
+    {{product.title}}
     <div>
         <a href="{% url 'market:merch_detail' cname product.id %}">{{ product.title }}</a>
         <br>

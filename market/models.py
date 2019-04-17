@@ -1,22 +1,7 @@
 from django.db import models
 
+from .constants import LABELS, SIZES, MATERIALS, COLORS
 
-LABELS = (
-    ('1', 'Cars'),
-    ('2', 'Merch')
-)
-
-SIZES = (
-    ('S', 'Small'),
-    ('M', 'Medium'),
-    ('L', 'Large'),
-    ('XL', 'Extra Large')
-)
-
-MATERIALS = (
-    ('1', 'cotton'),
-    ('2', 'flax')
-)
 
 class Categories(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -53,16 +38,34 @@ class Shirt(models.Model):
 
 class ShirtMaterial(models.Model):
     shirt = models.ForeignKey(Shirt, on_delete=models.CASCADE)
-    price_coef = models.FloatField()
+    price_coef = models.FloatField(default=0)
     material = models.CharField(max_length=15, choices=MATERIALS)
 
+    def get_material(self):
+        for mtrl in MATERIALS:
+            if mtrl[0] == self.material:
+                return mtrl[1]
+        return None
+
     def __str__(self):
-        return '{} - ${}'.format(self.material, self.price_coef)
+        return '{} | {} - ${}'.format(
+            self.shirt.title,
+            self.get_material(),
+            self.price_coef
+        )
 
 
-class ShirtSize(models.Model):
+class ShirtOptions(models.Model):
     material = models.ForeignKey(ShirtMaterial, on_delete=models.CASCADE)
     size = models.CharField(max_length=1, choices=SIZES)
+    color = models.CharField(max_length=7, choices=COLORS)
+
+    def get_color(self):
+        for clr in COLORS:
+            if clr[0] == self.color:
+                return clr[1]
+        return None
 
     def __str__(self):
+        print(self.size)
         return '{}'.format(self.size)
