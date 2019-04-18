@@ -2,22 +2,11 @@
 
 {% block content %}
 
-{{ shirt.title }}
-{{ shirt.image }}
-<br>
-{% for material in materials %}
-    {{ material.material }}:
-    <br>
-    
+{% for prod in prods %}
+    {{ prod.title }}<br>
+    {{ prod.color }}<br>
+    {{ prod.price }}
     <br>
 {% endfor %}
-
-{% for option in options %}
-    {{ option.size }} {{ option.color }}
-{% endfor %}
-<br>
-======================
-<br>
-{{ shirt.description }}
 
 {% endblock %}
