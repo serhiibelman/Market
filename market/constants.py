@@ -1,7 +1,3 @@
-LABELS = (
-    ('1', 'Cars'),
-    ('2', 'Merch')
-)
 
 SIZES = (
     ('S', 'Small'),
@@ -13,8 +9,6 @@ SIZES = (
 MATERIALS = (
     ('cotton', 'Cotton'),
     ('flax', 'Flax')
-    # 'cotton',
-    # 'flax'
 )
 
 COLORS = (

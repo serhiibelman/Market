@@ -1,13 +1,9 @@
 {% extends 'market/base.html' %}
 
 {% block content %}
-{% for category in categories %}
-    {% if category.label == '1' %}
-        <a href="{% url 'market:prods' category.name %}">{{ category.name }}</a>
-        <br>
-    {% elif category.label == '2' %}
-        <a href="{% url 'market:merch' category.name %}">{{ category.name }}</a>
-        <br>
-    {% endif %}
+{% for m in merch %}
+    <a href="{% url 'market:merch_detail' m.id %}">{{ m.title }}</a>
+    <br>
+
 {% endfor %}
 {% endblock %}
