@@ -70,3 +70,9 @@ class MerchView(models.Model):
     in_cart = models.BooleanField(default=False)
     price = models.FloatField()
     price_coef = models.FloatField()
+
+    def get_color(self):
+        for clr in COLORS:
+            if clr[0] == self.color:
+                return clr[1]
+        return None

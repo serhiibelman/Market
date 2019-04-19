@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for shirt in shirts %}
+    <a href="#">{{ shirt.title }}</a>
+    <br>
+
+{% endfor %}
+{% endblock %}

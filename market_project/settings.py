@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mailauth.apps.MailauthConfig',
     'market.apps.MarketConfig',
+    'shirts.apps.ShirtsConfig',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,9 @@ ROOT_URLCONF = 'market_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            '/home/serhii/programs/Market/Market/templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
