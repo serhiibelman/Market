@@ -7,5 +7,5 @@ app_name = 'shirts'
 
 urlpatterns = [
     path('', views.shirts, name='shirts'),
-    path('detail/<int:sid>/', views.shirts_detail, name='shirts_detail'),
+    path('detail/<int:sid>/<str:color>/<str:material>/', views.shirts_detail, name='shirts_detail'),
 ]
