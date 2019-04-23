@@ -2,7 +2,7 @@
 
 {% block content %}
 {% for shirt in shirts %}
-    <a href="#">{{ shirt.title }}</a>
+    <a href="{% url 'shirts:shirts_detail' shirt.id %}">{{ shirt.title }}</a>
     <br>
 
 {% endfor %}
