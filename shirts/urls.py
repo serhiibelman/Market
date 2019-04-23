@@ -7,4 +7,5 @@ app_name = 'shirts'
 
 urlpatterns = [
     path('', views.shirts, name='shirts'),
+    path('detail/<int:sid>/', views.shirts_detail, name='shirts_detail'),
 ]

@@ -5,6 +5,7 @@ from market.constants import COLORS, SIZES, MATERIALS
 
 class Shirt(models.Model):
     title = models.CharField(max_length=50)
+    group = models.CharField(max_length=50)
     image = models.ImageField()
     price = models.FloatField()
     color = models.CharField(max_length=7, choices=COLORS)
