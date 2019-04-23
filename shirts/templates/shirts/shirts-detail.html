@@ -2,4 +2,24 @@
 
 {% block content %}
 {{ shirt.title }}
+<br>
+======================================
+<br>
+{% for color in colors %}
+    <a href="{% url 'shirts:shirts_detail' shirt.id color shirt.material%}">{{ color }}</a>
+{% endfor %}
+<br>
+{% for size in sizes %}
+    <a href="{% url 'shirts:shirts_detail' shirt.id shirt.color shirt.material%}">{{ size }}</a>
+{% endfor %}
+<br>
+
+    {% for material in materials %}
+        <a href="{% url 'shirts:shirts_detail' shirt.id shirt.color shirt.material%}">{{ material }}</a>
+    {% endfor %}
+
+<br>
+======================================
+<br>
+Price: ${{ shirt.price }}
 {% endblock %}

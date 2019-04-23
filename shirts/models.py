@@ -6,6 +6,7 @@ from market.constants import COLORS, SIZES, MATERIALS
 class Shirt(models.Model):
     title = models.CharField(max_length=50)
     group = models.CharField(max_length=50)
+    as_group_title = models.BooleanField(default=False)
     image = models.ImageField()
     price = models.FloatField()
     color = models.CharField(max_length=7, choices=COLORS)
@@ -27,6 +28,6 @@ class Shirt(models.Model):
         return None
 
     def __str__(self):
-    	return '{}'.format(self.title)
+        return '{}'.format(self.title)
     
 
