@@ -2,7 +2,7 @@
 
 {% block content %}
 {% for shirt in shirts %}
-    <a href="{% url 'shirts:shirts_detail' shirt.id shirt.color shirt.material%}">{{ shirt.title }}</a>
+    <a href="{{ shirt.get_absolute_url }}">{{ shirt.title }}</a>
     <br>
 {% endfor %}
 {% endblock %}
