@@ -1,25 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{{ shirt.title }}
+<h2>{{ group.name }}</h2>
 <br>
 ======================================
 <br>
 {% for color in colors %}
-    <a href="{{ shirt.get_absolute_url }}"><button type="radio">{{ color }}</button></a>
+    <a href="{% url 'shirts:shirts_detail' group.slug color %}"><button type="radio">{{ color }}</button></a>
 {% endfor %}
 <br>
 <!-- radio button materials -->
-<!-- radio button sizes -->
-
-{% for size in sizes %}
-    <a href="{% url 'shirts:shirts_detail' shirt.id %}">{{ size }}</a>
+{% for material in materials %}
+    <label for="material">{{ material.material }}</label>
+    <input type="radio" name="material">
 {% endfor %}
 <br>
-
-{% for material in materials %}
-    <a href="{% url 'shirts:shirts_detail' shirt.id %}">{{ material }}</a>
-{% endfor %}
+<!-- radio button sizes -->
 
 <br>
 ======================================
