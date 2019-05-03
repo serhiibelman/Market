@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .models import Group, Shirt
+from .models import Group, Shirt, ShirtView
 from .forms import GroupForm, ShirtForm
 
 
@@ -13,7 +13,8 @@ def shirts(request):
 def shirts_detail(request, slug, color):
     group = Group.objects.get(slug=slug)
     shirts = Shirt.objects.filter(group=group.id)
-    materials = Shirt.objects.filter(color=color)
+    materials = ShirtView.objects.filter(color=color).distinct()
+
     colors = set()
     
     for shirt in shirts:

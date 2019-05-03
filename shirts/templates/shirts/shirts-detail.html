@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
+<script src="{% static 'shirts/js/shirt_detail.js' %}" type="text/javascript"></script>
 <h2>{{ group.name }}</h2>
 <br>
 ======================================
@@ -12,16 +13,26 @@
 <!-- radio button materials -->
 {% for material in materials %}
     <label for="material">{{ material.material }}</label>
-    <input type="radio" name="material">
+    <input type="radio" onclick="showSize('{{ materials|length }}')" name="material">
 {% endfor %}
 <br>
 <!-- radio button sizes -->
-
+<form class="sizes">
+{% for material in materials %}
+    <div id="mtr{{ forloop.counter }}">
+    {% for size in material.get_size %}
+        <label for="size">{{ size }}</label>
+        <input type="radio" id="sz{{ forloop.counter }}" name="size">
+    {% endfor %}
+    </div>
+{% endfor %}
+</form>
 <br>
 ======================================
 <br>
 Price: ${{ shirt.price }}
 {% endblock %}
+
 
 
 

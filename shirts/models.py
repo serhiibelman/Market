@@ -63,6 +63,20 @@ class Shirt(models.Model):
         return reverse('shirts:shirts_detail', kwargs=kwargs)
 
 
+class ShirtView(models.Model):
+    class Meta:
+        managed = False
+        db_table = 'shirt_view'
+
+    price = models.FloatField()
+    color = models.CharField(max_length=7, choices=COLORS)
+    material = models.CharField(max_length=15, choices=MATERIALS)
+    related_sizes = models.CharField(max_length=150)
+
+    def get_size(self):
+        return self.related_sizes.split(',')
+
+
 def create_slug(instance, new_slug=None):
     slug = slugify(instance.title)
     if new_slug is not None:

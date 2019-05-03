@@ -1,0 +1,14 @@
+CREATE OR REPLACE VIEW shirt_view AS SELECT shirts_shirt.*,
+string_agg(size, ',')
+OVER (PARTITION BY material) as related_sizes
+FROM shirts_shirt
+GROUP BY material;
+
+
+CREATE OR REPLACE VIEW shirt_view AS SELECT shirts_shirt.id,
+											shirts_shirt.price,
+											shirts_shirt.color,
+											shirts_shirt.material,
+											string_agg(size, ',')
+OVER (PARTITION BY shirts_shirt.material) as related_sizes
+FROM shirts_shirt;
