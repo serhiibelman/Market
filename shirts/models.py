@@ -10,10 +10,15 @@ def upload_location(instance, filename):
 
 
 class Group(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50)
 
     def __str__(self):
         return '{}'.format(self.name)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
 
 class Shirt(models.Model):
@@ -54,7 +59,22 @@ class Shirt(models.Model):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('shirts:shirts_detail', kwargs={'slug': self.slug})
+        kwargs = {'slug': self.group.slug, 'color': self.color}
+        return reverse('shirts:shirts_detail', kwargs=kwargs)
+
+
+class ShirtView(models.Model):
+    class Meta:
+        managed = False
+        db_table = 'shirt_view'
+
+    price = models.FloatField()
+    color = models.CharField(max_length=7, choices=COLORS)
+    material = models.CharField(max_length=15, choices=MATERIALS)
+    related_sizes = models.CharField(max_length=150)
+
+    def get_size(self):
+        return self.related_sizes.split(',')
 
 
 def create_slug(instance, new_slug=None):

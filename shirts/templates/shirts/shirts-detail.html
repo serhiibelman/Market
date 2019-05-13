@@ -1,31 +1,38 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-{{ shirt.title }}
+<script src="{% static 'shirts/js/shirt_detail.js' %}" type="text/javascript"></script>
+<h2>{{ group.name }}</h2>
 <br>
 ======================================
 <br>
 {% for color in colors %}
-    <a href="{{ shirt.get_absolute_url }}"><button type="radio">{{ color }}</button></a>
+    <a href="{% url 'shirts:shirts_detail' group.slug color %}"><button type="radio">{{ color }}</button></a>
 {% endfor %}
 <br>
 <!-- radio button materials -->
-<!-- radio button sizes -->
-
-{% for size in sizes %}
-    <a href="{% url 'shirts:shirts_detail' shirt.id %}">{{ size }}</a>
+{% for material in materials %}
+    <label for="material">{{ material.material }}</label>
+    <input type="radio" onclick="showSize('{{ materials|length }}')" name="material">
 {% endfor %}
 <br>
-
+<!-- radio button sizes -->
+<form class="sizes">
 {% for material in materials %}
-    <a href="{% url 'shirts:shirts_detail' shirt.id %}">{{ material }}</a>
+    <div id="mtr{{ forloop.counter }}">
+    {% for size in material.get_size %}
+        <label for="size">{{ size }}</label>
+        <input type="radio" id="sz{{ forloop.counter }}" name="size">
+    {% endfor %}
+    </div>
 {% endfor %}
-
+</form>
 <br>
 ======================================
 <br>
 Price: ${{ shirt.price }}
 {% endblock %}
+
 
 
 
