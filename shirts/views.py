@@ -20,6 +20,13 @@ def shirts_detail(request, slug, color):
     for shirt in shirts:
         colors.add(shirt.color)
     
+    if request.method == 'POST':
+        material = request.POST['material']
+        size = request.POST['size']
+        shirt = Shirt.objects.get(group=group, size=size, material=material)
+        print(shirt)
+        
+
     context = {
         'group': group,
         'shirts': shirts,
