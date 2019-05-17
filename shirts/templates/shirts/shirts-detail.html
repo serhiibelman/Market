@@ -1,36 +1,66 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<script src="{% static 'shirts/js/shirt_detail.js' %}" type="text/javascript"></script>
-<h2>{{ group.name }}</h2>
-<br>
-======================================
-<br>
-{% for color in colors %}
-    <a href="{% url 'shirts:shirts_detail' group.slug color %}"><button type="radio">{{ color }}</button></a>
-{% endfor %}
-<br>
-<!-- radio button materials -->
-{% for material in materials %}
-    <label for="material">{{ material.material }}</label>
-    <input type="radio" onclick="showSize('{{ materials|length }}')" name="material">
-{% endfor %}
-<br>
-<!-- radio button sizes -->
-<form class="sizes">
-{% for material in materials %}
-    <div id="mtr{{ forloop.counter }}">
-    {% for size in material.get_size %}
-        <label for="size">{{ size }}</label>
-        <input type="radio" id="sz{{ forloop.counter }}" name="size">
+<div>
+    <h2>{{ group.name }}</h2>
+    <br>
+    ======================================
+    <br>
+    {% for color in colors %}
+        <a href="{% url 'shirts:shirts_detail' group.slug color %}">
+            <button type="radio">{{ color }}</button>
+        </a>
     {% endfor %}
-    </div>
-{% endfor %}
-</form>
-<br>
-======================================
-<br>
-Price: ${{ shirt.price }}
+    <br>
+    <form class="" action="." method="POST">
+        {% csrf_token %}
+        <!-- radio button materials -->
+        {% for material in materials %}
+            <label for="material">{{ material.material }}</label>
+            <input type="radio" id="mtr{{ forloop.counter }}" onclick="showSize()" name="material" value="{{ material.material }}" checked>
+        {% endfor %}
+        <br>
+        <!-- radio button sizes -->
+        {% for material in materials %}
+            <div id="szs{{ forloop.counter }}">
+            {% for size in material.get_size %}
+                <label for="size">{{ size }}</label>
+                <input type="radio" id="sz{{ forloop.counter }}" name="size" value="{{ size }}" checked>
+            {% endfor %}
+            </div>
+        {% endfor %}
+        <br>
+        ======================================
+        <br>
+        <div>
+            <p>Price: $<span id="price">{{ shirt.price }}</span></p>
+        </div>
+        <button type="submit">Buy</button>
+    </form>
+    
+</div>
+<script type="text/javascript">
+    let ln = '{{ materials|length }}';
+
+    function showSize() {
+        // Show available sizes for particular material
+        console.log()
+        for (let i=1; i <= ln; i++) {
+            let sizes = document.getElementById("szs" + i);
+            let material = document.getElementById("mtr" + i);
+
+            if (material.checked) {
+                sizes.style.display = "block";
+            } else {
+                sizes.style.display = "none";
+            }
+        }
+    }
+
+    
+
+    window.onload = showSize();
+</script>
 {% endblock %}
 
 
