@@ -2,7 +2,7 @@ from django.db import models, transaction
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
 
-from market.constants import COLORS, SIZES, MATERIALS
+from .constants import COLORS, SIZES, MATERIALS
 
 
 def upload_location(instance, filename):
@@ -34,13 +34,13 @@ class Shirt(models.Model):
     material = models.CharField(max_length=15, choices=MATERIALS)
     size = models.CharField(max_length=1, choices=SIZES)
     description = models.TextField()
-    in_cart = models.BooleanField(default=False)
 
     def __str__(self):
         return '{} {}'.format(self.title, self.size)
 
     @transaction.atomic
     def save(self, *args, **kwargs):
+        # Update group title based on is_group_title field
         if self.is_group_title:
             Shirt.objects.filter(is_group_title=True).update(is_group_title=False)
         super(Shirt, self).save(*args, **kwargs)

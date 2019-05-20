@@ -25,7 +25,7 @@ def shirts_detail(request, slug, color):
         size = request.POST['size']
         shirt = Shirt.objects.get(group=group, size=size, material=material)
         print(shirt)
-        
+        # TODO: add to cart        
 
     context = {
         'group': group,
@@ -36,6 +36,7 @@ def shirts_detail(request, slug, color):
     return render(request, 'shirts/shirts-detail.html', context)
 
 
+# TODO: add permissions
 def add_shirt(request):
     form = ShirtForm(request.POST or None, request.FILES or None)
     if request.method == 'POST':
