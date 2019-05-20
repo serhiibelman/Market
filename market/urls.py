@@ -1,12 +1,8 @@
-from django.urls import path
-
-from . import views
-
-
-app_name = 'market'
+from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
-    path('', views.main, name='main'),
-    path('detail/<int:mid>/', views.merch_detail, name='merch_detail'),
-    path('cart/', views.cart, name='cart'),
+    path('admin/', admin.site.urls),
+    path('shirts/', include('shirts.urls')),
+    # path('cart/', include('shopping_cart.urls')),
 ]

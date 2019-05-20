@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-
-{% block content %}
-{% for m in merch %}
-    <a href="{% url 'market:merch_detail' m.id %}">{{ m.title }}</a>
-    <br>
-
-{% endfor %}
-{% endblock %}
