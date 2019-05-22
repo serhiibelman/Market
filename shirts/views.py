@@ -2,15 +2,17 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Group, Shirt, ShirtView
 from .forms import GroupForm, ShirtForm
+from mailauth.models import User
 
 
 def shirts(request):
+    print(User.objects.all())
     shirts = Shirt.objects.filter(is_group_title=True)
     context = {'shirts': shirts}
     return render(request, 'shirts/shirts.html', context)
 
 
-def shirts_detail(request, slug, color):
+def shirts_card(request, slug, color):
     group = Group.objects.get(slug=slug)
     shirts = Shirt.objects.filter(group=group.id)
     materials = ShirtView.objects.filter(color=color).distinct()
@@ -33,7 +35,7 @@ def shirts_detail(request, slug, color):
         'colors': colors,
         'materials': materials
     }
-    return render(request, 'shirts/shirts-detail.html', context)
+    return render(request, 'shirts/shirts-card.html', context)
 
 
 # TODO: add permissions
