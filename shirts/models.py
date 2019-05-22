@@ -10,6 +10,8 @@ def upload_location(instance, filename):
 
 
 class Group(models.Model):
+    class Meta:
+        managed = False
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=50)
 
@@ -45,6 +47,9 @@ class Shirt(models.Model):
             Shirt.objects.filter(is_group_title=True).update(is_group_title=False)
         super(Shirt, self).save(*args, **kwargs)
 
+    def get_group(self):
+        return self.group
+
     def get_material(self):
         for mtrl in MATERIALS:
             if mtrl[0] == self.material:
@@ -60,7 +65,7 @@ class Shirt(models.Model):
     def get_absolute_url(self):
         from django.urls import reverse
         kwargs = {'slug': self.group.slug, 'color': self.color}
-        return reverse('shirts:shirts_detail', kwargs=kwargs)
+        return reverse('shirts:shirts_card', kwargs=kwargs)
 
 
 class ShirtView(models.Model):

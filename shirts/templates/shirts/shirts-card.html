@@ -7,7 +7,7 @@
     ======================================
     <br>
     {% for color in colors %}
-        <a href="{% url 'shirts:shirts_detail' group.slug color %}">
+        <a href="{% url 'shirts:shirts_card' group.slug color %}">
             <button type="radio">{{ color }}</button>
         </a>
     {% endfor %}
