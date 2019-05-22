@@ -6,7 +6,7 @@
     <li>
     {% for product in products %}
         <div>
-            <a href="{% url 'market:prods_detail' 'Tesla' product.id %}">{{ product.title }}</a>
+            <a href="#">{{ product.title }}</a>
             <br>
             <form action="." method="POST">
                 {% csrf_token %}
