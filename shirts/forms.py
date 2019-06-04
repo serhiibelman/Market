@@ -10,16 +10,16 @@ class GroupForm(ModelForm):
 
 
 class ShirtForm(ModelForm):
-	class Meta:
-		model = Shirt
-		fields = [
-            'title',
-            'group',
-            'is_group_title',
-            'price',
-            'color',
-            'material',
-            'size',
-            'description',
-            'image'
-		]
+      class Meta:
+            model = Shirt
+            fields = [
+                  'title',
+                  'group',
+                  'is_group_title',
+                  'price',
+                  'color',
+                  'material',
+                  'size',
+                  'description',
+                  'image'
+            ]
