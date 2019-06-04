@@ -10,8 +10,6 @@ def upload_location(instance, filename):
 
 
 class Group(models.Model):
-    class Meta:
-        managed = False
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=50)
 
@@ -103,5 +101,4 @@ def pre_save_shirt_receiver(sender, instance, *args, **kwargs):
 
 pre_save.connect(pre_save_shirt_receiver, sender=Shirt)
 
-    
 
