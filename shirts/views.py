@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 
 from .models import Group, Shirt, ShirtView
 from .forms import GroupForm, ShirtForm
 from mailauth.models import User
+from shopping_cart.models import OrderItem, Order
+from shopping_cart.extras import generate_order_id
 
 
 def shirts(request):
@@ -16,6 +19,7 @@ def shirts_card(request, slug, color):
     group = Group.objects.get(slug=slug)
     shirts = Shirt.objects.filter(group=group.id)
     materials = ShirtView.objects.filter(color=color).distinct()
+    user_profile = get_object_or_404(User, id=request.user.id)
 
     colors = set()
     
@@ -26,8 +30,15 @@ def shirts_card(request, slug, color):
         material = request.POST['material']
         size = request.POST['size']
         shirt = Shirt.objects.get(group=group, size=size, material=material)
-        print(shirt)
-        # TODO: add to cart        
+        order_item, status = OrderItem.objects.get_or_create(product=shirt)
+        print(order_item, status)
+        user_order, status= Order.objects.get_or_create(owner=user_profile)
+        user_order.items.add(order_item)
+        print(user_order, status)
+        if status:
+            user_order.ref_code = generate_order_id()
+            user_order.save()
+        messages.info(request, 'item added to cart')      
 
     context = {
         'group': group,
